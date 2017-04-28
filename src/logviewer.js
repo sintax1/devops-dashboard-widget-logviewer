@@ -14,7 +14,7 @@ angular.module('DevopsDashboard.widget.logviewer', ['adf.provider'])
         controller: 'logDataCtrl'
       });
   })
-  .controller('logDataCtrl', function($scope, $timeout, User, DBLogger) {
+  .controller('logDataCtrl', function($scope, $timeout, User, Logger) {
 
     $scope.smartTableData = [];     // Resulting data set after search, filter, etc.
     $scope.smartTableDataSrc = [];  // Original raw data set
@@ -22,19 +22,18 @@ angular.module('DevopsDashboard.widget.logviewer', ['adf.provider'])
 
     var refreshLogs = $scope.refreshLogs = function() {
 
-      var user = User.get({}, function() {
-        var uid = user.uid;
-        var logs = DBLogger.query({uid: uid}, function() {
-          angular.forEach(logs, function(log) {
-            log.service = log.log.service;
-            log.command = log.log.command;
-            log.output = JSON.stringify(log.log.data);
-            this.push(log);
-          }, $scope.smartTableDataSrc);
+      Logger.getLogs().then( function(logs) {
+        /*
+        angular.forEach(logs, function(log) {
+          log.output = JSON.stringify(log.output);
+          this.push(log);
+        }, $scope.smartTableDataSrc);
+        */
 
-          // Initialize the rows per page select menu
-          $('.selectpicker').selectpicker('refresh');
-        });
+        $scope.smartTableDataSrc = logs;
+
+        // Initialize the rows per page select menu
+        $('.selectpicker').selectpicker('refresh');
       });
     };
 

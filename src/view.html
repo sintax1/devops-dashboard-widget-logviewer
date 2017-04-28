@@ -18,7 +18,7 @@
         <thead>
         <tr class="sortable ">
           <th st-sort="updated_at" st-sort-default="true">Date</th>
-          <th st-sort="service">Service</th>
+          <th st-sort="widget">Widget</th>
           <th st-sort="type">Type</th>
           <th st-sort="command">Command</th>
           <th st-sort="output">Output</th>
@@ -26,7 +26,7 @@
         <!-- field specific search replaced with global search
         <tr>
           <th><input st-search="updated_at" placeholder="Search Date" class="input-sm form-control search-input" type="search"/></th>
-          <th><input st-search="service" placeholder="Search Service" class="input-sm form-control search-input"
+          <th><input st-search="widget" placeholder="Search Widget" class="input-sm form-control search-input"
                      type="search"/></th>
           <th><input st-search="type" placeholder="Search Type" class="input-sm form-control search-input"
                      type="search"/></th>
@@ -43,7 +43,7 @@
         <tbody>
         <tr ng-repeat="log in smartTableData">
           <td>{{log.updated_at}}</td>
-          <td>{{log.service}}</td>
+          <td>{{log.widget}}</td>
           <td>{{log.type}}</td>
           <td>{{log.command}}</td>
           <td>{{log.output}}</td>
